@@ -1,6 +1,6 @@
 <template>
-  <div class=''>
-    {{ name }}
+  <div class='home-page'>
+    <div class="name">{{ name }}</div>
   </div>
 </template>
 
@@ -9,6 +9,10 @@ import { ref } from 'vue'
 const name = ref('模板')
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss" scope>
+.home-page {
+  .name{
+    color: $bg-color;
+  }
+}
 </style>
