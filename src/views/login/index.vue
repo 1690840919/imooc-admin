@@ -61,9 +61,9 @@ const handleLoginBtn = async function () {
       .then(result => {
         // console.log('result', result)
       })
-      .catch(err => {
-        console.log('err', err)
-      })
+      // .catch(err => {
+      //   console.log('err', err)
+      // })
       .finally(() => {
         loginLoading.value = false
       })
