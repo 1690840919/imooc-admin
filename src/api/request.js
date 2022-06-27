@@ -3,6 +3,7 @@ import { ElMessage } from 'element-plus'
 import store from '@/store/index.js'
 import router from '@/router/index.js'
 import request from '@/api/request.js'
+import { isCheckTokenTimeout } from '@/utils/auth.js'
 // 是否正在刷新token
 let isRefreshToken = false
 // 存储401发出的请求
@@ -20,6 +21,10 @@ service.interceptors.request.use(config => {
   // 用户信息存在，已经登陆。添加token
   if (userInfo && token) {
     config.headers.Authorization = token
+    if (isCheckTokenTimeout()) {
+      store.dispatch('user/logout')
+      return Promise.reject(new Error('token 过期'))
+    }
   }
   return config
 }, error => {

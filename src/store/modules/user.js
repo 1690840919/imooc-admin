@@ -3,7 +3,7 @@ import { setItem, getItem } from '@/utils/storage.js'
 import router from '@/router/index.js'
 import { ElMessage } from 'element-plus'
 import { IMOOC_ADMIN_USERINFO, IMOOC_ADMIN_TOKEN } from '@/constant/index.js'
-
+import { setStartLoginTimeStamp } from '@/utils/auth.js'
 export default {
   namespaced: true,
   state: () => ({
@@ -34,6 +34,8 @@ export default {
           store.commit('setUserInfo', userInfo)
           store.commit('setToken', token)
           router.push(redirect || '/')
+          // 缓存开始登陆的时间
+          setStartLoginTimeStamp()
           ElMessage.success('登陆成功')
           resolve()
         })
@@ -41,6 +43,11 @@ export default {
             reject(err)
           })
       })
+    },
+    logout(store, data) {
+      store.commit('setUserInfo', null)
+      store.commit('setToken', null)
+      router.push('/login')
     }
   }
 }
