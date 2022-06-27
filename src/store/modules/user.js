@@ -2,13 +2,14 @@ import { userLogin } from '@/api/user.js'
 import { setItem, getItem } from '@/utils/storage.js'
 import router from '@/router/index.js'
 import { ElMessage } from 'element-plus'
-import { IMOOC_ADMIN_USERINFO, IMOOC_ADMIN_TOKEN } from '@/constant/index.js'
+import { IMOOC_ADMIN_USERINFO, IMOOC_ADMIN_TOKEN, IMOOC_ADMIN_MENUS } from '@/constant/index.js'
 import { setStartLoginTimeStamp } from '@/utils/auth.js'
 export default {
   namespaced: true,
   state: () => ({
     userInfo: getItem(IMOOC_ADMIN_USERINFO),
-    token: getItem(IMOOC_ADMIN_TOKEN)
+    token: getItem(IMOOC_ADMIN_TOKEN),
+    menus: getItem(IMOOC_ADMIN_MENUS)
   }),
   mutations: {
     setUserInfo(state, data) {
@@ -18,6 +19,10 @@ export default {
     setToken(state, data) {
       state.token = data
       setItem(IMOOC_ADMIN_TOKEN, data)
+    },
+    setMenus(state, data) {
+      state.menus = data
+      setItem(IMOOC_ADMIN_MENUS, data)
     }
   },
   actions: {
@@ -29,10 +34,10 @@ export default {
           // 按道理需要加密再传输
           password
         }).then(res => {
-          const token = res.token
-          const userInfo = res.userInfo
+          const { token, userInfo, menus } = res
           store.commit('setUserInfo', userInfo)
           store.commit('setToken', token)
+          store.commit('setMenus', menus)
           router.push(redirect || '/')
           // 缓存开始登陆的时间
           setStartLoginTimeStamp()

@@ -26,7 +26,7 @@ import HomeMain from './components/homeMain/index.vue'
 .home-page {
   .home-aside {
     height: 100vh;
-    background: rgb(179, 192, 208)
+    background: rgb(53,59,65);
   }
 
   .home-header {

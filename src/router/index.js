@@ -10,7 +10,56 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/views/layout/index.vue')
+    component: () => import('@/views/layout/index.vue'),
+    meta: {
+      title: '首页'
+    },
+    children: [
+      {
+        path: '',
+        redirect: '/home/personal'
+      },
+      {
+        path: 'personal',
+        name: 'personal',
+        meta: {
+          title: '个人中心'
+        },
+        component: () => import('@/views/personal/index.vue')
+      },
+      {
+        path: 'users',
+        name: 'users',
+        meta: {
+          title: '用户管理'
+        },
+        component: () => import('@/views/users/index.vue')
+      },
+      {
+        path: 'roles',
+        name: 'roles',
+        meta: {
+          title: '角色管理'
+        },
+        component: () => import('@/views/roles/index.vue')
+      },
+      {
+        path: 'menus',
+        name: 'menus',
+        meta: {
+          title: '菜单管理'
+        },
+        component: () => import('@/views/menus/index.vue')
+      },
+      {
+        path: 'resource',
+        name: 'resource',
+        meta: {
+          title: '资源管理'
+        },
+        component: () => import('@/views/resource/index.vue')
+      }
+    ]
   },
   {
     path: '/login',
