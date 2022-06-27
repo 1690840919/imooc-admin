@@ -10,3 +10,8 @@ export const validatePassword = () => {
     }
   }
 }
+
+// 校验是不是外部资源
+export const isExternal = (path) => {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}

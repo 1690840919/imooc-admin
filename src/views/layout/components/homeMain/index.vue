@@ -1,6 +1,6 @@
 <template>
-  <div class="app">
-    <router-view></router-view>
+  <div class='home-main'>
+    Main
   </div>
 </template>
 
@@ -8,4 +8,5 @@
 </script>
 
 <style lang="scss" scoped>
+.home-main {}
 </style>
