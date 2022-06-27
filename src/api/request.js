@@ -30,7 +30,7 @@ service.interceptors.request.use(config => {
 // 响应拦截器
 service.interceptors.response.use(response => {
   // 状态码2xx都会进入这里
-  console.log('response', response.status)
+  // console.log('response', response.status)
   const { data, message, success } = response.data
   if (success) {
     return data

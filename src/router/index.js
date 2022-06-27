@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import('@/views/home/index.vue')
+    component: () => import('@/views/layout/index.vue')
   },
   {
     path: '/login',
@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
   if (store.getters.token) {
     // 已经登陆的不能进入登陆页面
     if (to.path === '/login') {
-      next()
+      next('/')
     } else {
       // 已经登陆，直接进入页面
       next()
