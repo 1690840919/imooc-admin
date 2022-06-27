@@ -2,21 +2,22 @@ import { userLogin } from '@/api/user.js'
 import { setItem, getItem } from '@/utils/storage.js'
 import router from '@/router/index.js'
 import { ElMessage } from 'element-plus'
+import { IMOOC_ADMIN_USERINFO, IMOOC_ADMIN_TOKEN } from '@/constant/index.js'
 
 export default {
   namespaced: true,
   state: () => ({
-    userInfo: getItem('imooc-admin-userInfo'),
-    token: getItem('imooc-admin-token')
+    userInfo: getItem(IMOOC_ADMIN_USERINFO),
+    token: getItem(IMOOC_ADMIN_TOKEN)
   }),
   mutations: {
     setUserInfo(state, data) {
       state.userInfo = data
-      setItem('imooc-admin-userInfo', data)
+      setItem(IMOOC_ADMIN_USERINFO, data)
     },
     setToken(state, data) {
       state.token = data
-      setItem('imooc-admin-token', data)
+      setItem(IMOOC_ADMIN_TOKEN, data)
     }
   },
   actions: {

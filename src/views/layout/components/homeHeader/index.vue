@@ -10,7 +10,7 @@
     </div>
     <div class="menus-box">
       <el-dropdown>
-        <span class="el-dropdown-link">
+        <span v-if="$store.state.user.userInfo" class="el-dropdown-link">
           {{ $store.state.user.userInfo.name }}
           <el-icon class="el-icon--right">
             <svg-icon icon="user" />
