@@ -11,7 +11,7 @@
     <div class="menus-box">
       <el-dropdown>
         <span class="el-dropdown-link">
-          超级管理员
+          {{ $store.state.user.userInfo.name }}
           <el-icon class="el-icon--right">
             <svg-icon icon="user" />
           </el-icon>
@@ -31,9 +31,17 @@
 <script setup>
 import SvgIcon from '@/components/svgIcon/index.vue'
 import { ArrowRight } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+const store = useStore()
+const router = useRouter()
 // 点击退出登陆
 const handleCancelLoginBtn = () => {
-  console.log('退出登陆')
+  store.commit('user/setUserInfo', null)
+  store.commit('user/setToken', null)
+  router.push('/login')
+  ElMessage.success('退出成功')
 }
 </script>
 
