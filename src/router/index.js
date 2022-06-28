@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
+import { getUserMenuRoutes } from '@/utils/routes.js'
 // 白名单
 const whiteList = ['/login']
 const routes = [
@@ -22,43 +23,12 @@ const routes = [
       {
         path: 'personal',
         name: 'personal',
+        component: () => import('@/views/layout/index.vue'),
         meta: {
           title: '个人中心'
-        },
-        component: () => import('@/views/personal/index.vue')
+        }
       },
-      {
-        path: 'users',
-        name: 'users',
-        meta: {
-          title: '用户管理'
-        },
-        component: () => import('@/views/users/index.vue')
-      },
-      {
-        path: 'roles',
-        name: 'roles',
-        meta: {
-          title: '角色管理'
-        },
-        component: () => import('@/views/roles/index.vue')
-      },
-      {
-        path: 'menus',
-        name: 'menus',
-        meta: {
-          title: '菜单管理'
-        },
-        component: () => import('@/views/menus/index.vue')
-      },
-      {
-        path: 'resource',
-        name: 'resource',
-        meta: {
-          title: '资源管理'
-        },
-        component: () => import('@/views/resource/index.vue')
-      }
+      ...getUserMenuRoutes(store.state.user.menus)
     ]
   },
   {

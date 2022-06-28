@@ -38,14 +38,12 @@ import SvgIcon from '@/components/svgIcon/index.vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
-import { useRoute } from 'vue-router'
 const store = useStore()
 // 点击退出登陆
 const handleCancelLoginBtn = () => {
   store.dispatch('user/logout')
   ElMessage.success('退出成功')
 }
-console.log('route', useRoute().matched)
 </script>
 
 <style lang="scss" scoped>

@@ -42,6 +42,8 @@ export default {
           // 缓存开始登陆的时间
           setStartLoginTimeStamp()
           ElMessage.success('登陆成功')
+          // // 强制刷新网页，为了重新实例化router
+          // location.reload()
           resolve()
         })
           .catch(err => {
@@ -52,6 +54,7 @@ export default {
     logout(store, data) {
       store.commit('setUserInfo', null)
       store.commit('setToken', null)
+      // store.commit('setMenus', null)
       router.push('/login')
     }
   }

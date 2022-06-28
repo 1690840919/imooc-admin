@@ -14,9 +14,10 @@ const store = useStore()
 const route = useRoute()
 const menus = store.state.user.menus
 const currentMenu = ref('personal')
-currentMenu.value = route.path.split('/').pop()
 watch(route, () => {
   currentMenu.value = route.path.split('/').pop()
+}, {
+  immediate: true
 })
 
 </script>
