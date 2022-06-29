@@ -4,6 +4,7 @@ import router from '@/router/index.js'
 import { ElMessage } from 'element-plus'
 import { IMOOC_ADMIN_USERINFO, IMOOC_ADMIN_TOKEN, IMOOC_ADMIN_MENUS } from '@/constant/index.js'
 import { setStartLoginTimeStamp } from '@/utils/auth.js'
+import allStore from '@/store/index.js'
 export default {
   namespaced: true,
   state: () => ({
@@ -54,7 +55,9 @@ export default {
     logout(store, data) {
       store.commit('setUserInfo', null)
       store.commit('setToken', null)
-      // store.commit('setMenus', null)
+      store.commit('setMenus', null)
+      // 清空路由实例中的addRoutes
+      allStore.dispatch('permission/removeUserRoutes')
       router.push('/login')
     }
   }

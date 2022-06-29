@@ -5,3 +5,5 @@ export const TIME_STAMP = 'time-stamp'
 export const TOKEN_TIMEOUT_VALUE = 2 * 60 * 60 * 1000
 // 路由菜单
 export const IMOOC_ADMIN_MENUS = 'imooc-admin-menus'
+// 路由菜单
+export const IMOOC_ADMIN_ADD_ROUTES = 'imooc-admin-addRoutes'

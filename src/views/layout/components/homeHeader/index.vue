@@ -2,9 +2,13 @@
   <div class="home-header">
     <div class="breadcrumb-box">
       <el-breadcrumb :separator-icon="ArrowRight">
+        <el-breadcrumb-item to="/">
+          首页
+        </el-breadcrumb-item>
         <el-breadcrumb-item
+          class="breadcrumb-item"
           :key="item.meta.title"
-          v-for="item in $route.matched"
+          v-for="item in $route.matched.filter(item => item.meta.title)"
           :to="{ path: item.path }"
         >
           {{ item.meta.title }}
@@ -54,6 +58,9 @@ const handleCancelLoginBtn = () => {
   height: 100%;
 
   .breadcrumb-box {
+    .breadcrumb-item {
+      color:red!important;
+    }
   }
 
   .menus-box {

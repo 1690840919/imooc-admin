@@ -1,51 +1,60 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
-import { getUserMenuRoutes } from '@/utils/routes.js'
+import permissionManage from './modules/permissionManage'
+import userManage from './modules/userManage'
+import { setUserRoutes } from '@/utils/permission.js'
+// import { getUserMenuRoutes } from '@/utils/routes.js'
 // 白名单
 const whiteList = ['/login']
-const routes = [
+// 首次进入，必须加载路由
+let startAddRoutes = true
+// 公共路由
+export const publicRoutes = [
   {
-    path: '/',
-    redirect: '/home'
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue'),
+    hidden: true
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: () => import('@/views/layout/index.vue'),
     meta: {
-      title: '首页'
     },
     children: [
       {
         path: '',
-        redirect: '/home/personal'
+        redirect: '/personal',
+        hidden: true
       },
       {
-        path: 'personal',
+        path: '/personal',
         name: 'personal',
-        component: () => import('@/views/layout/index.vue'),
+        component: () => import('@/views/personal/index.vue'),
         meta: {
-          title: '个人中心'
+          title: '个人中心',
+          icon: 'platform'
         }
-      },
-      ...getUserMenuRoutes(store.state.user.menus)
+      }
     ]
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login/index.vue')
-  },
-  {
-    path: '/:pathMatch(.*)',
-    name: '404',
-    component: () => import('@/views/404/index.vue')
   }
+  // 空路由必须放在最后
+  // {
+  //   path: '/:pathMatch(.*)',
+  //   name: '404',
+  //   component: () => import('@/views/404/index.vue')
+  // }
+]
+// 私有路由
+export const privateRoutes = [
+  userManage,
+  permissionManage
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: publicRoutes
 })
 
 // 路由守卫导航
@@ -57,7 +66,19 @@ router.beforeEach((to, from, next) => {
       next('/')
     } else {
       // 已经登陆，直接进入页面
-      next()
+      // 如果没有配置路由或者首次进入必须加载路由
+      if (!store.state.permission.addRoutes || startAddRoutes) {
+        startAddRoutes = false
+        console.log('登陆成功/刷新了，需要配置路由')
+        store.dispatch('permission/getUserRoutes', store.getters.role).then(res => {
+          // 配置路由
+          setUserRoutes(res)
+          // 中断本次跳转，开启下一次重新跳转，以便于上面的配置新路由
+          next({ ...to, replace: true })
+        })
+      } else {
+        next()
+      }
     }
   } else {
     // 用户未登录,但是存在白名单
