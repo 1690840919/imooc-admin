@@ -19,6 +19,8 @@ import SvgIcon from '@/components/svgIcon/index.vue'
 
 <style lang="scss" scoped>
 .home-aside {
+  min-width: 200px;
+  overflow: hidden;
   .logo-box {
     height: 60px;
     display: flex;
@@ -30,6 +32,7 @@ import SvgIcon from '@/components/svgIcon/index.vue'
       padding-left: 10px;
       font-size: 28px;
       font-weight: bolder;
+      padding-right: 20px;
     }
   }
 

@@ -1,7 +1,10 @@
 <template>
-  <div class='home-page'>
+  <div class="home-page">
     <el-container>
-      <el-aside class="home-aside" width="200px">
+      <el-aside
+        class="home-aside"
+        :width="$store.getters.isCollapse ? '60px' : '200px'"
+      >
         <home-aside />
       </el-aside>
       <el-container>
@@ -25,8 +28,10 @@ import HomeMain from './components/homeMain/index.vue'
 <style lang="scss" scoped>
 .home-page {
   .home-aside {
+    overflow: hidden;
+    transition: width 0.7s;
     height: 100vh;
-    background: rgb(53,59,65);
+    background: rgb(53, 59, 65);
   }
 
   .home-header {
@@ -34,7 +39,7 @@ import HomeMain from './components/homeMain/index.vue'
   }
 
   .home-main {
-    background-color: pink
+    background-color: pink;
   }
 }
 </style>

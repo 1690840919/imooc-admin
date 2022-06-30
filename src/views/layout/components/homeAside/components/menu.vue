@@ -5,9 +5,10 @@
     active-text-color="blue"
     :default-active="currentMenu"
     :router="true"
+    :collapse="$store.getters.isCollapse"
+    :collapse-transition="false"
     @open="handleOpen"
     @close="handleClose"
-    width="100%"
   >
     <menu-item :data="menus" />
   </el-menu>
@@ -24,6 +25,7 @@ import { publicRoutes, privateRoutes } from '@/router/index.js'
 const store = useStore()
 const route = useRoute()
 const currentMenu = ref('personal')
+// 监听路由变化，实时更新左侧菜单
 watch(
   route,
   () => {
@@ -33,6 +35,7 @@ watch(
     immediate: true
   }
 )
+// 根据路由和用户 身份获取菜单
 const menus = getUserMenus(
   [...publicRoutes, ...privateRoutes],
   store.getters.role
@@ -40,4 +43,5 @@ const menus = getUserMenus(
 </script>
 
 <style lang="scss" scoped>
+
 </style>

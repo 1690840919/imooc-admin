@@ -6,7 +6,7 @@
       <el-sub-menu v-if="item.children" :index="item.menuRouter">
         <template #title>
           <span class="icon-box">
-            <svg-icon :icon="item.menuIcon" />
+            <svg-icon :size="20" :icon="item.menuIcon" />
           </span>
           <span>{{ item.menuName }}</span>
         </template>
@@ -16,13 +16,15 @@
       <!-- 不存在子菜单的 -->
       <el-menu-item v-else :index="item.menuRouter">
         <span class="icon-box">
-          <svg-icon :icon="item.menuIcon" />
+          <svg-icon :size="20" :icon="item.menuIcon" />
         </span>
-        <span>{{ item.menuName }}</span>
+        <!-- template是为了折叠后能够显示菜单名提示 -->
+        <template #title>
+          <span>{{ item.menuName }}</span>
+        </template>
       </el-menu-item>
     </temp>
   </div>
-
 </template>
 
 <script setup>
@@ -38,7 +40,7 @@ defineProps({
 
 <style lang="scss" scoped>
 .icon-box {
-  padding: 0 5px 0 10px;
+  padding: 0 15px 0 0px;
   display: inline-block;
 }
 </style>
