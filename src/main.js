@@ -8,10 +8,13 @@ import '@/styles/index.scss'
 import ElementPlus from './plugins/element-plus'
 // 引入element-plus-icon插件
 import ElementPlusIcon from './plugins/element-plus-icon'
+// 引入i18n
+import i18n from '@/i18n/index.js'
 
 const app = createApp(App)
 app.use(store)
   .use(router)
   .use(ElementPlus)
   .use(ElementPlusIcon)
+  .use(i18n)
   .mount('#app')

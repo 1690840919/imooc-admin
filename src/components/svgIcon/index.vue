@@ -1,11 +1,18 @@
 <template>
   <div class="svg-icon-box">
-    <!-- 展示外部SVG图标 -->
-    <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" :class="className"></div>
-    <!-- 展示element-plus内部SVG图标 -->
-    <el-icon v-else :size="size" :color="color" class="no-inherit svg-icon">
-      <component :is="icon" />
-    </el-icon>
+    <!-- 展示icon图标 -->
+    <template v-if="icon">
+      <!-- 展示外部SVG图标 -->
+      <div v-if="isExternal" :style="styleExternalIcon" class="svg-external-icon svg-icon" :class="className"></div>
+      <!-- 展示element-plus内部SVG图标 -->
+      <el-icon v-if="!isExternal" :size="size" :color="color" class="no-inherit svg-icon">
+        <component :is="icon" />
+      </el-icon>
+    </template>
+    <!-- 展示iconfont图标 -->
+    <div v-if="type === 'iconfont'" class="iconfont">
+      <i class="iconfont" :class="className" :style="{ fontSize: size + 'px', color }"></i>
+    </div>
   </div>
 </template>
 
@@ -16,10 +23,13 @@
 import { defineProps, computed } from 'vue'
 import { isExternal as external } from '@/utils/validate.js'
 const props = defineProps({
+  // 图标类型
+  type: {
+    type: String
+  },
   // icon图标
   icon: {
-    type: String,
-    require: true
+    type: String
   },
   // 图标大小
   size: {

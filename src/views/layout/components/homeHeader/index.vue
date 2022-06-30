@@ -25,6 +25,22 @@
       </el-breadcrumb>
     </div>
     <div class="menus-box">
+      <!-- 中英文切换 -->
+      <div class="chang-language-icon">
+        <el-dropdown @command="handleCommand">
+          <svg-icon type="iconfont" className="icon-zhongyingwen" />
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="handleChangeLanguage('zh')" :disabled="$store.getters.language==='zh'">
+                {{ $t('msg.layout.changeZhLanguageTip') }}
+              </el-dropdown-item>
+              <el-dropdown-item @click="handleChangeLanguage('en')" :disabled="$store.getters.language==='en'">
+                {{ $t('msg.layout.changeEnLanguageTip') }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
       <el-dropdown>
         <span v-if="$store.state.user.userInfo" class="el-dropdown-link">
           {{ $store.state.user.userInfo.name }}
@@ -36,9 +52,9 @@
           <el-dropdown-menu>
             <el-dropdown-item>首页</el-dropdown-item>
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item @click="handleCancelLoginBtn"
-              >退出登陆</el-dropdown-item
-            >
+            <el-dropdown-item @click="handleCancelLoginBtn">
+              {{ $t('msg.layout.logout') }}
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -51,7 +67,9 @@ import SvgIcon from '@/components/svgIcon/index.vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 const store = useStore()
+const i18n = useI18n()
 // 点击退出登陆
 const handleCancelLoginBtn = () => {
   store.dispatch('user/logout')
@@ -60,6 +78,12 @@ const handleCancelLoginBtn = () => {
 // 点击折叠
 const handleCollapse = value => {
   store.commit('layout/setIsCollapse', value)
+}
+// 切换中英文
+const handleChangeLanguage = value => {
+  store.commit('layout/setLanguage', value)
+  i18n.locale.value = value
+  ElMessage.success(i18n.t('msg.layout.changeLanguageSuccess'))
 }
 </script>
 
@@ -77,7 +101,7 @@ const handleCollapse = value => {
     .collapse-btn-box {
       padding-right: 10px;
       position: relative;
-      top: .5px;
+      top: 0.5px;
       cursor: pointer;
     }
 
@@ -89,6 +113,11 @@ const handleCollapse = value => {
   .menus-box {
     display: flex;
     align-items: center;
+
+    .chang-language-icon {
+      padding: 0 20px;
+      cursor: pointer;
+    }
   }
 }
 </style>
