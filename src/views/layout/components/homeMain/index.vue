@@ -1,12 +1,9 @@
 <template>
-  <div class='home-main'>
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script setup>
 </script>
 
 <style lang="scss" scoped>
-.home-main {}
 </style>

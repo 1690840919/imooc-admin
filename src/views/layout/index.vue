@@ -39,7 +39,11 @@ import HomeMain from './components/homeMain/index.vue'
   }
 
   .home-main {
-    background-color: pink;
+    height: calc(100vh - 60px);
+  }
+
+  .el-main {
+    padding-top: 0;
   }
 }
 </style>
