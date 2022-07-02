@@ -43,7 +43,7 @@
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="操作" width="200">
+          <el-table-column align="center" label="操作" width="200">
             <template #default="scope">
               <el-button size="small" @click="handlePermissionBtn(scope.row)">
                 设置权限
