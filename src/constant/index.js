@@ -9,3 +9,5 @@ export const IMOOC_ADMIN_MENUS = 'imooc-admin-menus'
 export const IMOOC_ADMIN_ADD_ROUTES = 'imooc-admin-addRoutes'
 // 项目 语言
 export const LANGUAGE = 'LANGUAGE'
+// 默认主题颜色
+export const THEME_COLOR = 'theme-color'

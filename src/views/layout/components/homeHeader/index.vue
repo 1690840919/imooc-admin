@@ -25,6 +25,8 @@
       </el-breadcrumb>
     </div>
     <div class="menus-box">
+      <!-- 主题变更 -->
+      <theme-select/>
       <!-- 中英文切换 -->
       <Language/>
       <!-- 用户信息 -->
@@ -50,6 +52,7 @@
 </template>
 
 <script setup>
+import ThemeSelect from '@/components/themeSelect/index.vue'
 import Language from '@/components/language/index.vue'
 import SvgIcon from '@/components/svgIcon/index.vue'
 import { ArrowRight } from '@element-plus/icons-vue'

@@ -25,22 +25,26 @@
           <!-- 表格列内容设置 -->
           <el-table-column
             v-for="item in usersRules"
+            :type="item.type"
             :prop="item.prop"
             :key="item.label"
             :label="item.label"
             :width="item.width"
             :formatter="item.formatter"
           />
-          <el-table-column align="center" label="头像">
+          <el-table-column align="center" label="用户头像">
             <template #default="scope">
               <el-avatar :size="50" :src="scope.row.avatar" />
             </template>
           </el-table-column>
-          <el-table-column align="center" label="状态">
+          <el-table-column align="center" label="账号状态">
             <el-switch v-model="value" />
           </el-table-column>
-          <el-table-column align="center" label="操作">
+          <el-table-column align="center" label="操作" width="230">
             <template #default="scope">
+              <el-button size="small" @click="handleShowUserInfoBtn(scope.row)">
+                查看
+              </el-button>
               <el-button size="small" @click="handlePermissionBtn(scope.row)">
                 编辑
               </el-button>
@@ -148,6 +152,61 @@
         </span>
       </template>
     </el-dialog>
+    <!-- 显示用户信息 -->
+    <el-dialog
+      :width="600"
+      title="用户信息"
+      v-if="showUserInfoWindow"
+      v-model="showUserInfoWindow"
+    >
+      <el-form ref="dialogForm" label-width="80px">
+        <div class="user-info-top-box">
+          <div class="user-info-left">
+            <el-form-item label="用户ID" prop="userID">
+              <el-input
+                v-model="userInfoWindowData.userID"
+                placeholder="请输入用户ID"
+              />
+            </el-form-item>
+            <el-form-item label="用户名" prop="username">
+              <el-input
+                v-model="userInfoWindowData.username"
+                placeholder="请输入用户名"
+              />
+            </el-form-item>
+          </div>
+          <div class="user-info-right">
+            <el-form-item
+              class="upload-avatar-box"
+              label="用户头像"
+              prop="userAvatar"
+            >
+              <el-avatar
+                shape="square"
+                :size="100"
+                :src="userInfoWindowData.avatar"
+              />
+            </el-form-item>
+          </div>
+        </div>
+
+        <el-form-item label="用户状态" prop="userStatus">
+          <el-select
+            style="width: 100%"
+            v-model="userInfoWindowData.userStatus"
+          >
+            <el-option :value="1" label="开通"></el-option>
+            <el-option :value="2" label="关闭"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="用户角色" prop="userRole">
+          <el-select style="width: 100%" v-model="userInfoWindowData.userRole">
+            <el-option :value="1" label="超级管理员"></el-option>
+            <el-option :value="2" label="管理员"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -159,11 +218,12 @@ import { ElMessage } from 'element-plus'
 // 表格列内容设置
 const usersRules = [
   {
-    label: '用户ID',
-    prop: 'userId'
+    type: 'index',
+    label: '编号',
+    width: 100
   },
   {
-    label: '用户名',
+    label: '用户账号',
     prop: 'username'
   },
   {
@@ -223,6 +283,16 @@ const handleDeleteUser = item => {
   console.log('正在删除用户', item.userID)
   ElMessage.success('删除成功')
 }
+// 显示用户信息
+const showUserInfoWindow = ref(false)
+// 用户信息
+const userInfoWindowData = ref(null)
+// 点击查看用户信息
+const handleShowUserInfoBtn = item => {
+  console.log(item)
+  userInfoWindowData.value = item
+  showUserInfoWindow.value = true
+}
 </script>
 
 <style lang="scss" scoped>
@@ -240,7 +310,7 @@ const handleDeleteUser = item => {
       }
     }
   }
-  .page-box{
+  .page-box {
     position: absolute;
     left: 0;
     right: 0;
@@ -251,5 +321,11 @@ const handleDeleteUser = item => {
 }
 
 .upload-avatar-box {
+}
+.user-info-top-box {
+  display: flex;
+  div {
+    flex: 1;
+  }
 }
 </style>
