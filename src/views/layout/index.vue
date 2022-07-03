@@ -8,7 +8,7 @@
         <home-aside />
       </el-aside>
       <el-container>
-        <el-header class="home-header">
+        <el-header height="80px" class="home-header">
           <home-header />
         </el-header>
         <el-main class="home-main">
@@ -39,11 +39,12 @@ import HomeMain from './components/homeMain/index.vue'
   }
 
   .home-main {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 80px);
+    background-color: rgb(244, 244, 244);
   }
 
   .el-main {
-    padding-top: 0;
+    // padding-top: 0;
   }
 }
 </style>

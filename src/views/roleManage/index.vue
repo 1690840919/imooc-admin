@@ -246,7 +246,7 @@ const handlePermissionConfirm = () => {
 <style lang="scss" scoped>
 .role-manage-page {
   .box-card {
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 125px);
 
     .card-header {
       display: flex;

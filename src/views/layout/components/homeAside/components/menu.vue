@@ -30,6 +30,10 @@ watch(
   route,
   () => {
     currentMenu.value = route.path
+    store.commit('layout/addRouteTag', {
+      title: route.meta.title,
+      path: route.path
+    })
   },
   {
     immediate: true
@@ -43,5 +47,4 @@ const menus = getUserMenus(
 </script>
 
 <style lang="scss" scoped>
-
 </style>

@@ -299,7 +299,7 @@ const handleShowUserInfoBtn = item => {
 .user-manage-page {
   .box-card {
     position: relative;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 130px);
 
     .card-header {
       display: flex;

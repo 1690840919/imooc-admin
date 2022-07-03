@@ -79,13 +79,14 @@ import Author from './components/author.vue'
 import Chapters from './components/chapters.vue'
 import { ref } from 'vue'
 const currentTab = ref('first')
+console.log('刷新了')
 </script>
 
 <style lang="scss" scoped>
 .personal-page {
   height: 100%;
   .el-card{
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 120px);
   }
   .user-info-box {
     text-align: center;
