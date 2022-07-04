@@ -5,8 +5,6 @@ function checkPermission(el, binding) {
   const { value } = binding
   // 获取当前用户的所有权限
   const UserPermission = store.getters.role
-  console.log('value', value)
-  console.log('UserMission', UserPermission)
   // value必须是一个数组
   if (value && value instanceof Array) {
     // 检测用户的权限是否包含了功能对应的权限

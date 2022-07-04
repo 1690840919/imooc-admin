@@ -1,15 +1,7 @@
 <template>
-  <el-menu
-    background-color="rgb(53,59,65)"
-    text-color="white"
-    active-text-color="blue"
-    :default-active="currentMenu"
-    :router="true"
-    :collapse="$store.getters.isCollapse"
-    :collapse-transition="false"
-    @open="handleOpen"
-    @close="handleClose"
-  >
+  <el-menu background-color="rgb(53,59,65)" text-color="white" active-text-color="blue" :default-active="currentMenu"
+    :router="true" :collapse="$store.getters.isCollapse" :collapse-transition="false" @open="handleOpen"
+    @close="handleClose">
     <menu-item :data="menus" />
   </el-menu>
 </template>
@@ -30,6 +22,8 @@ watch(
   route,
   () => {
     currentMenu.value = route.path
+    // 跳转登录页，不记录tag
+    if (route.path === '/login') return
     store.commit('layout/addRouteTag', {
       title: route.meta.title,
       path: route.path

@@ -58,6 +58,7 @@ export default {
       store.commit('setMenus', null)
       // 清空路由实例中的addRoutes
       allStore.dispatch('permission/removeUserRoutes')
+      allStore.commit('layout/setMenuUpdateRouteTag', { type: 'logout' })
       router.push('/login')
     }
   }

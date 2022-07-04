@@ -58,7 +58,7 @@ export default {
     setCurrentTagIndex(state, index) {
       state.currentTagIndex = index
     },
-    // 点击刷新、关闭所有，关闭其他
+    // 点击刷新、关闭所有，关闭其他, 退出登陆
     setMenuUpdateRouteTag(state, { type, index }) {
       if (type === 'refresh') {
         // 并没有刷新效果
@@ -73,6 +73,9 @@ export default {
         state.currentTagIndex = 0
         // 跳到默认个人中心
         router.push('/personal')
+      } else if (type === 'logout') {
+        state.routeTags = []
+        state.currentTagIndex = 0
       }
     }
   },
