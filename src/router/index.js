@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
 import permissionManage from './modules/permissionManage'
 import userManage from './modules/userManage'
+import serviceManage from './modules/serviceManage'
 import { setUserRoutes } from '@/utils/permission.js'
 // import { getUserMenuRoutes } from '@/utils/routes.js'
 // 白名单
@@ -49,7 +50,8 @@ export const publicRoutes = [
 // 私有路由
 export const privateRoutes = [
   userManage,
-  permissionManage
+  permissionManage,
+  serviceManage
 ]
 
 const router = createRouter({
