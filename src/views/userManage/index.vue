@@ -211,14 +211,14 @@ const showImportUserWindow = ref(false)
         }
       }
     }
-  }
-  .page-box {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    display: flex;
-    justify-content: center;
+    .page-box {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 50px;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 </style>
