@@ -4,6 +4,7 @@
       <template #header>
         <div class="card-header">
           <el-button
+            v-permission="['super-admin']"
             @click="showCreateUserWindow = true"
             type="primary"
             class="button"

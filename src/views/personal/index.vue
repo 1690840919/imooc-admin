@@ -86,7 +86,7 @@ console.log('刷新了')
 .personal-page {
   height: 100%;
   .el-card{
-    min-height: calc(100vh - 120px);
+    height: calc(100vh - 120px);
   }
   .user-info-box {
     text-align: center;

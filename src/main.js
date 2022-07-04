@@ -10,8 +10,12 @@ import ElementPlus from './plugins/element-plus'
 import ElementPlusIcon from './plugins/element-plus-icon'
 // 引入i18n
 import i18n from '@/i18n/index.js'
+// 引入自定义指令
+import InstallDirective from '@/directives/index.js'
 
 const app = createApp(App)
+// 自定义指令
+InstallDirective(app)
 app.use(store)
   .use(router)
   .use(ElementPlus)

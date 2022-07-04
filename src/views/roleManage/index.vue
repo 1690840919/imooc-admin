@@ -193,7 +193,7 @@ const handleWindowConfirm = () => {
   ElMessage.success('添加成功')
 }
 // 点击删除角色
-const handleDeleteRole = (item) => {
+const handleDeleteRole = item => {
   console.log('点击删除角色', item.id)
   ElMessage.success('删除成功')
 }
@@ -202,7 +202,7 @@ const showPermissionWindow = ref(false)
 // 用户当前的权限
 const currentPermission = ref([])
 // 点击权限分配
-const handlePermissionBtn = (item) => {
+const handlePermissionBtn = item => {
   showPermissionWindow.value = true
   currentPermission.value = item.permission
 }
@@ -214,7 +214,25 @@ const permissionData = [
   },
   {
     id: '用户管理',
-    label: '用户管理'
+    label: '用户管理',
+    children: [
+      {
+        id: '添加用户',
+        label: '添加用户'
+      },
+      {
+        id: '查看用户',
+        label: '查看用户'
+      },
+      {
+        id: '编辑用户',
+        label: '编辑用户'
+      },
+      {
+        id: '删除用户',
+        label: '删除用户'
+      }
+    ]
   },
   {
     id: '权限管理',
@@ -222,11 +240,43 @@ const permissionData = [
     children: [
       {
         id: '角色管理',
-        label: '角色管理'
+        label: '角色管理',
+        children: [
+          {
+            id: '添加角色',
+            label: '添加角色'
+          },
+          {
+            id: '设置权限',
+            label: '设置权限'
+          },
+          {
+            id: '删除角色',
+            label: '删除角色'
+          }
+        ]
       },
       {
         id: '菜单管理',
-        label: '菜单管理'
+        label: '菜单管理',
+        children: [
+          {
+            id: '添加菜单',
+            label: '添加菜单'
+          },
+          {
+            id: '查看菜单',
+            label: '查看菜单'
+          },
+          {
+            id: '编辑菜单',
+            label: '编辑菜单'
+          },
+          {
+            id: '删除菜单',
+            label: '删除菜单'
+          }
+        ]
       },
       {
         id: '资源管理',
