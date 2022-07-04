@@ -1,5 +1,10 @@
 <template>
-  <el-dialog :model-value="modelValue" title="主题变更" :width="300">
+  <el-dialog
+    :model-value="modelValue"
+    title="主题变更"
+    :width="300"
+    :before-close="close"
+  >
     <div class="box">
       <el-color-picker
         v-model="color"

@@ -8,16 +8,34 @@
             @click="showCreateUserWindow = true"
             type="primary"
             class="button"
-            >添加用户</el-button
           >
-          <el-input placeholder="请输入搜索内容" class="input-with-select">
-            <template #prepend>
-              <div class="name">搜索用户</div>
-            </template>
-            <template #append>
-              <el-button :icon="Search" />
-            </template>
-          </el-input>
+            添加用户
+          </el-button>
+          <div class="right-menu">
+            <!-- 用户导入 -->
+            <div class="add-user-btn user-btn">
+              <el-button @click="showImportUserWindow = true">
+                导入用户
+              </el-button>
+            </div>
+
+            <!-- 用户导出 -->
+            <div class="down-user-btn user-btn">
+              <el-button @click="showExportUserWindow = true">
+                导出用户
+              </el-button>
+            </div>
+
+            <!-- 用户搜索 -->
+            <el-input placeholder="请输入搜索内容" class="input-with-select">
+              <template #prepend>
+                <div class="name">搜索用户</div>
+              </template>
+              <template #append>
+                <el-button :icon="Search" />
+              </template>
+            </el-input>
+          </div>
         </div>
       </template>
       <div class="table-box">
@@ -81,137 +99,24 @@
       </div>
     </el-card>
     <!-- 添加用户弹窗 -->
-    <el-dialog
-      :width="500"
-      title="添加用户"
-      v-if="showCreateUserWindow"
-      v-model="showCreateUserWindow"
-    >
-      <el-form ref="dialogForm" label-width="80px">
-        <el-form-item label="用户ID" prop="userID">
-          <el-input
-            v-model="createUserForm.userID"
-            placeholder="请输入用户ID"
-          />
-        </el-form-item>
-        <el-form-item label="用户名" prop="username">
-          <el-input
-            v-model="createUserForm.username"
-            placeholder="请输入用户名"
-          />
-        </el-form-item>
-        <el-form-item label="用户状态" prop="userStatus">
-          <el-select style="width: 100%" v-model="createUserForm.userStatus">
-            <el-option :value="1" label="开通"></el-option>
-            <el-option :value="2" label="关闭"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="用户角色" prop="userRole">
-          <el-select style="width: 100%" v-model="createUserForm.userRole">
-            <el-option :value="1" label="超级管理员"></el-option>
-            <el-option :value="2" label="管理员"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          class="upload-avatar-box"
-          label="用户头像"
-          prop="userAvatar"
-        >
-          <el-upload action="#" list-type="picture-card" :auto-upload="false">
-            <el-icon>
-              <Plus />
-            </el-icon>
-            <template #file="{ file }">
-              <div>
-                <img
-                  class="el-upload-list__item-thumbnail"
-                  :src="file.url"
-                  alt=""
-                />
-                <span class="el-upload-list__item-actions">
-                  <span
-                    v-if="!disabled"
-                    class="el-upload-list__item-delete"
-                    @click="handleRemove(file)"
-                  >
-                    <el-icon>
-                      <Delete />
-                    </el-icon>
-                  </span>
-                </span>
-              </div>
-            </template>
-          </el-upload>
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="showCreateUserWindow = false">取 消</el-button>
-          <el-button @click="handleCreateUserConfirm" type="primary">
-            确 定
-          </el-button>
-        </span>
-      </template>
-    </el-dialog>
+    <add-user v-model="showCreateUserWindow" />
     <!-- 显示用户信息 -->
-    <el-dialog
-      :width="600"
-      title="用户信息"
-      v-if="showUserInfoWindow"
+    <user-info
       v-model="showUserInfoWindow"
-    >
-      <el-form ref="dialogForm" label-width="80px">
-        <div class="user-info-top-box">
-          <div class="user-info-left">
-            <el-form-item label="用户ID" prop="userID">
-              <el-input
-                v-model="userInfoWindowData.userID"
-                placeholder="请输入用户ID"
-              />
-            </el-form-item>
-            <el-form-item label="用户名" prop="username">
-              <el-input
-                v-model="userInfoWindowData.username"
-                placeholder="请输入用户名"
-              />
-            </el-form-item>
-          </div>
-          <div class="user-info-right">
-            <el-form-item
-              class="upload-avatar-box"
-              label="用户头像"
-              prop="userAvatar"
-            >
-              <el-avatar
-                shape="square"
-                :size="100"
-                :src="userInfoWindowData.avatar"
-              />
-            </el-form-item>
-          </div>
-        </div>
-
-        <el-form-item label="用户状态" prop="userStatus">
-          <el-select
-            style="width: 100%"
-            v-model="userInfoWindowData.userStatus"
-          >
-            <el-option :value="1" label="开通"></el-option>
-            <el-option :value="2" label="关闭"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="用户角色" prop="userRole">
-          <el-select style="width: 100%" v-model="userInfoWindowData.userRole">
-            <el-option :value="1" label="超级管理员"></el-option>
-            <el-option :value="2" label="管理员"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+      :userInfoWindowData="userInfoWindowData"
+    />
+    <!-- 显示导出用户窗口 -->
+    <export-user v-model="showExportUserWindow" />
+    <!-- 显示导入用户窗口 -->
+    <import-user v-model="showImportUserWindow" />
   </div>
 </template>
 
 <script setup>
+import ImportUser from './components/importUser.vue'
+import ExportUser from './components/exportUser.vue'
+import AddUser from './components/addUser.vue'
+import UserInfo from './components/userInfo.vue'
 import { ref, reactive } from 'vue'
 import { getTime } from '@/utils/time.js'
 import { Search } from '@element-plus/icons'
@@ -265,20 +170,7 @@ const pageData = reactive({
 })
 // 是否显示添加用户窗口
 const showCreateUserWindow = ref(false)
-// 添加用户表单
-const createUserForm = reactive({
-  userId: '',
-  username: '',
-  userRole: '',
-  userStatus: '',
-  userAvatar: ''
-})
-// 点击创建用户确认
-const handleCreateUserConfirm = () => {
-  console.log('正在创建用户')
-  ElMessage.success('添加成功')
-  showCreateUserWindow.value = false
-}
+
 // 点击删除用户
 const handleDeleteUser = item => {
   console.log('正在删除用户', item.userID)
@@ -290,10 +182,13 @@ const showUserInfoWindow = ref(false)
 const userInfoWindowData = ref(null)
 // 点击查看用户信息
 const handleShowUserInfoBtn = item => {
-  console.log(item)
   userInfoWindowData.value = item
   showUserInfoWindow.value = true
 }
+// 显示导出用户窗口
+const showExportUserWindow = ref(false)
+// 显示导入用户窗口
+const showImportUserWindow = ref(false)
 </script>
 
 <style lang="scss" scoped>
@@ -306,8 +201,14 @@ const handleShowUserInfoBtn = item => {
       display: flex;
       justify-content: space-between;
 
-      .input-with-select {
-        width: 400px;
+      .right-menu {
+        display: flex;
+        .user-btn {
+          margin-right: 20px;
+        }
+        .input-with-select {
+          width: 400px;
+        }
       }
     }
   }
@@ -318,15 +219,6 @@ const handleShowUserInfoBtn = item => {
     bottom: 50px;
     display: flex;
     justify-content: center;
-  }
-}
-
-.upload-avatar-box {
-}
-.user-info-top-box {
-  display: flex;
-  div {
-    flex: 1;
   }
 }
 </style>
