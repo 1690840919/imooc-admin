@@ -1,15 +1,10 @@
-import Dialog from './dialog'
-import Page from './page'
-
-const components = [
-  Dialog,
-  Page
-]
-
 export default {
   install(app) {
-    components.forEach(item => {
-      app.use(item)
+    const AllFiles = require.context('./', true, /index\.vue$/)
+    AllFiles.keys().forEach(file => {
+      const Component = AllFiles(file).default
+      // file.split('/')[1] 文件夹名=====组件名
+      app.component(file.split('/')[1], Component)
     })
   }
 }

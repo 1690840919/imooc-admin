@@ -28,7 +28,6 @@
 </template>
 
 <script setup>
-import SvgIcon from '@/components/svgIcon/index.vue'
 import menuItem from './menuItem.vue'
 import { defineProps } from 'vue'
 defineProps({

@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-import SvgIcon from '@/components/svgIcon/index.vue'
 import SelectColor from './selectColor.vue'
 import { ref } from 'vue'
 const showSelectColor = ref(false)

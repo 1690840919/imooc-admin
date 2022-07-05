@@ -14,7 +14,6 @@
 
 <script setup>
 import Menu from './components/menu.vue'
-import SvgIcon from '@/components/svgIcon/index.vue'
 </script>
 
 <style lang="scss" scoped>

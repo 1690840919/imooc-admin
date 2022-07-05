@@ -73,7 +73,6 @@
 </template>
 
 <script setup>
-import SvgIcon from '@/components/svgIcon/index.vue'
 import Function from './components/function.vue'
 import Author from './components/author.vue'
 import Chapters from './components/chapters.vue'

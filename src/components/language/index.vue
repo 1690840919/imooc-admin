@@ -23,7 +23,6 @@
 </template>
 
 <script setup>
-import SvgIcon from '@/components/svgIcon/index.vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'

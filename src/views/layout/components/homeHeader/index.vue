@@ -89,9 +89,6 @@
 
 <script setup>
 import TagMenu from './components/tagMenu.vue'
-import ThemeSelect from '@/components/themeSelect/index.vue'
-import Language from '@/components/language/index.vue'
-import SvgIcon from '@/components/svgIcon/index.vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
