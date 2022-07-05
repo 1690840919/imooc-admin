@@ -12,6 +12,8 @@ import ElementPlusIcon from './plugins/element-plus-icon'
 import i18n from '@/i18n/index.js'
 // 引入自定义指令
 import InstallDirective from '@/directives/index.js'
+// 引入所有全局组件
+import AllComponent from './components'
 
 const app = createApp(App)
 // 自定义指令
@@ -20,5 +22,6 @@ app.use(store)
   .use(router)
   .use(ElementPlus)
   .use(ElementPlusIcon)
+  .use(AllComponent)
   .use(i18n)
   .mount('#app')

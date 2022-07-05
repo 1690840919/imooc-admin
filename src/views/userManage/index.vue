@@ -93,6 +93,9 @@
       />
     </el-card>
     <!-- 添加用户弹窗 -->
+    <Dialog v-if="false" v-model="showCreateUserWindow" @confirm="getTableData">
+      测试弹窗封装
+    </Dialog>
     <add-user v-model="showCreateUserWindow" />
     <!-- 显示用户信息 -->
     <user-info
@@ -107,7 +110,6 @@
 </template>
 
 <script setup>
-import Page from '@/components/page/index.vue'
 import ImportUser from './components/importUser.vue'
 import ExportUser from './components/exportUser.vue'
 import AddUser from './components/addUser.vue'
