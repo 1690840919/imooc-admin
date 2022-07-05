@@ -34,6 +34,15 @@ export default {
         roles: ['super-admin', 'admin'],
         icon: 'goods'
       }
+    },
+    {
+      path: '/serviceManage/courseManage',
+      component: () => import('@/views/courseManage/index.vue'),
+      meta: {
+        title: '课程管理',
+        roles: ['super-admin', 'admin'],
+        icon: 'notebook'
+      }
     }
   ]
 }

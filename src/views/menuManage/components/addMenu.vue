@@ -17,7 +17,21 @@
         <el-input v-model="addMenuData.menuIcon" placeholder="请输入菜单图标" />
       </el-form-item>
       <el-form-item label="菜单排序" prop="menuRank">
-        <el-input v-model="addMenuData.menuRank" placeholder="请输入菜单排序" />
+        <el-input-number
+          :style="{ width: '100%' }"
+          v-model="addMenuData.menuRank"
+          :min="1"
+          :max="100"
+          @change="handleChange"
+        />
+      </el-form-item>
+      <el-form-item label="上级菜单" prop="menuParent">
+        <el-select style="width: 100%" v-model="addMenuData.menuParent">
+          <el-option :value="1" label="一级"></el-option>
+          <el-option :value="2" label="二级"></el-option>
+          <el-option :value="3" label="三级"></el-option>
+          <el-option :value="4" label="四级"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="菜单级别" prop="menuLevel">
         <el-select style="width: 100%" v-model="addMenuData.menuLevel">
@@ -25,6 +39,12 @@
           <el-option :value="2" label="二级"></el-option>
           <el-option :value="3" label="三级"></el-option>
           <el-option :value="4" label="四级"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="菜单状态" prop="menuLevel">
+        <el-select style="width: 100%" v-model="addMenuData.menuStatus">
+          <el-option :value="1" label="显示"></el-option>
+          <el-option :value="2" label="隐藏"></el-option>
         </el-select>
       </el-form-item>
     </el-form>
@@ -56,7 +76,7 @@ const closeWindow = () => {
 }
 // 点击确认按钮
 const handleConfirmWindow = () => {
-  ElMessage.success('上传成功')
+  ElMessage.success('添加成功')
   closeWindow()
 }
 

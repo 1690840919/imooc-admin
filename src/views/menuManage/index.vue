@@ -45,6 +45,11 @@
             :width="item.width"
             :formatter="item.formatter"
           />
+          <el-table-column align="center" label="菜单状态">
+            <template #default="scope">
+              <el-switch v-model="scope.row.menuStatus" @change="handleMenuStatus(scope.row)" />
+            </template>
+          </el-table-column>
           <el-table-column align="center" label="操作" width="200">
             <template #default="scope">
               <el-button size="small" @click="handleEditMenuBtn(scope.row)">
@@ -129,6 +134,7 @@ const menusList = [
     menuPath: '/personal',
     menuLevel: 1,
     menuIcon: 'platform',
+    menuStatus: true,
     menuRank: 1
   },
   {
@@ -136,6 +142,7 @@ const menusList = [
     menuPath: '/userManage',
     menuLevel: 1,
     menuIcon: 'user',
+    menuStatus: true,
     menuRank: 2
   },
   {
@@ -143,6 +150,7 @@ const menusList = [
     menuPath: '/permission',
     menuLevel: 1,
     menuIcon: 'setting',
+    menuStatus: true,
     menuRank: 3,
     children: [
       {
@@ -150,6 +158,7 @@ const menusList = [
         menuPath: '/permission/roleManage',
         menuLevel: 2,
         menuIcon: 'user',
+        menuStatus: true,
         menuRank: 1
       }
     ]
@@ -159,6 +168,7 @@ const menusList = [
     menuPath: '/service',
     menuLevel: 1,
     menuIcon: 'school',
+    menuStatus: true,
     menuRank: 4,
     children: [
       {
@@ -166,6 +176,7 @@ const menusList = [
         menuPath: '/service/articleManage',
         menuLevel: 2,
         menuIcon: 'tickets',
+        menuStatus: true,
         menuRank: 1
       }
     ]
@@ -183,6 +194,10 @@ const handleEditMenuBtn = () => {
 }
 // 显示编辑菜单窗口
 const showEditMenuWindow = ref(false)
+// 点击菜单状态开关
+const handleMenuStatus = item => {
+  ElMessage.success('切换成功')
+}
 </script>
 
 <style lang="scss" scoped>

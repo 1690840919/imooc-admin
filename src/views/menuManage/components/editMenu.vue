@@ -68,7 +68,7 @@ const closeWindow = () => {
 }
 // 点击确认按钮
 const handleConfirmWindow = () => {
-  ElMessage.success('上传成功')
+  ElMessage.success('编辑成功')
   closeWindow()
 }
 
