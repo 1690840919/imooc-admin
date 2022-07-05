@@ -85,18 +85,12 @@
         </el-table>
       </div>
       <!-- 分页 -->
-      <div class="page-box">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :page-size="pageData.num"
-          :total="pageData.total"
-          @prev-text="handlePrevText"
-          @next-text="handleNextText"
-          @current-change="currentPageChange"
-        >
-        </el-pagination>
-      </div>
+      <Page
+        v-model:page="pageData.page"
+        v-model:limit="pageData.limit"
+        :total="pageData.total"
+        :pageCallback="getTableData"
+      />
     </el-card>
     <!-- 添加用户弹窗 -->
     <add-user v-model="showCreateUserWindow" />
@@ -113,6 +107,7 @@
 </template>
 
 <script setup>
+import Page from '@/components/page/index.vue'
 import ImportUser from './components/importUser.vue'
 import ExportUser from './components/exportUser.vue'
 import AddUser from './components/addUser.vue'
@@ -166,7 +161,9 @@ const usersList = [
 ]
 // 分页数据
 const pageData = reactive({
-  total: 100
+  total: 100,
+  page: 3,
+  limit: 5
 })
 // 是否显示添加用户窗口
 const showCreateUserWindow = ref(false)
@@ -189,6 +186,10 @@ const handleShowUserInfoBtn = item => {
 const showExportUserWindow = ref(false)
 // 显示导入用户窗口
 const showImportUserWindow = ref(false)
+// 获取表格数据
+const getTableData = () => {
+  console.log('加载数据')
+}
 </script>
 
 <style lang="scss" scoped>
@@ -203,21 +204,15 @@ const showImportUserWindow = ref(false)
 
       .right-menu {
         display: flex;
+
         .user-btn {
           margin-right: 20px;
         }
+
         .input-with-select {
           width: 400px;
         }
       }
-    }
-    .page-box {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 50px;
-      display: flex;
-      justify-content: center;
     }
   }
 }
