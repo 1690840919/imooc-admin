@@ -1,7 +1,15 @@
 <template>
-  <el-menu background-color="rgb(53,59,65)" text-color="white" active-text-color="blue" :default-active="currentMenu"
-    :router="true" :collapse="$store.getters.isCollapse" :collapse-transition="false" @open="handleOpen"
-    @close="handleClose">
+  <el-menu
+    background-color="rgb(53,59,65)"
+    text-color="white"
+    active-text-color="blue"
+    :default-active="currentMenu"
+    :router="true"
+    :collapse="$store.getters.isCollapse"
+    :collapse-transition="false"
+    @open="handleOpen"
+    @close="handleClose"
+  >
     <menu-item :data="menus" />
   </el-menu>
 </template>
