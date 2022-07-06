@@ -27,6 +27,9 @@
           <el-option :value="2" label="管理员"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="用户地区" prop="userArea">
+        <choose-area @change="handleChooseArea" :type="1" />
+      </el-form-item>
       <el-form-item
         class="upload-avatar-box"
         label="用户头像"
@@ -101,6 +104,10 @@ const handleCreateUserConfirm = () => {
   console.log('正在创建用户')
   ElMessage.success('添加成功')
   closeWindow()
+}
+// 用户选择城市
+const handleChooseArea = item => {
+  console.log(item)
 }
 </script>
 
