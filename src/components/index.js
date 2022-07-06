@@ -1,5 +1,6 @@
 export default {
   install(app) {
+    // true 扫描子文件夹
     const AllFiles = require.context('./', true, /index\.vue$/)
     AllFiles.keys().forEach(file => {
       const Component = AllFiles(file).default

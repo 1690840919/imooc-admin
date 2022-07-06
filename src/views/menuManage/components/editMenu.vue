@@ -20,10 +20,11 @@
         />
       </el-form-item>
       <el-form-item label="菜单图标" prop="menuIcon">
-        <el-input
-          v-model="editMenuData.menuIcon"
-          placeholder="请输入菜单图标"
-        />
+        <el-input placeholder="菜单图标" v-model="editMenuData.menuIcon">
+          <template #append>
+            <choose-icon @change="handleChooseIcon" />
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item label="菜单排序" prop="menuRank">
         <el-input
@@ -74,6 +75,11 @@ const handleConfirmWindow = () => {
 
 // 编辑菜单表单
 const editMenuData = ref({})
+
+// 点击选择图标
+const handleChooseIcon = icon => {
+  editMenuData.value.menuIcon = icon
+}
 </script>
 
 <style lang="scss" scoped>
