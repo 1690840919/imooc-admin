@@ -32,7 +32,7 @@ export default {
       meta: {
         title: '菜单管理',
         roles: ['super-admin', 'admin'],
-        icon: 'menu'
+        icon: 'grid'
       }
     },
     {
