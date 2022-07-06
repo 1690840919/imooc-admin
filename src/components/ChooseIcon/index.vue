@@ -26,6 +26,7 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import * as ElIcons from '@element-plus/icons'
+import { useCopy } from '@/hooks/useCopy/index.js'
 const emits = defineEmits(['change'])
 const dialogVisible = ref(false)
 // 点击图标选择按钮
@@ -36,6 +37,7 @@ const handleChooseBtn = () => {
 const clickIcon = icon => {
   dialogVisible.value = false
   emits('change', icon)
+  useCopy(`<svg-icon :icon="${icon}" />`)
 }
 </script>
 
